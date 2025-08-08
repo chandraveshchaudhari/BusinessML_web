@@ -1,0 +1,29 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: symbols
+- file: 1_Linear_regression
+- file: 2_Regularization
+- file: 3_Naive_Bayes
+- file: 4_Logistic_Regression
+- file: 5_Dimensionality_Reduction
+- file: 6_Clustering
+- file: 7_Gaussian_Mixture_Models
+- file: 8_Nearest_Neighbour_Algorithm
+- file: 10_Support_Vector_Machines
+- file: 11_Decision_Trees
+- file: 12_Ensemble_Methods
+- file: 13_Neural_Networks
+- file: 14_Arima
+- file: 15_LSTM
+- file: 16_CNN
+- file: 17_Resnet
+- file: 18_LLM
+- file: 19_Reinforcement_Learning
+- file: 20_Multimodal_Learning
+- file: Generative_Models
+- file: Performance_Metrics
+- file: Visualization
