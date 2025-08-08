@@ -1,0 +1,325 @@
+Traceback (most recent call last):
+  File "/Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import plotly.graph_objects as go
+from dash import Dash, dcc, html, Input, Output
+
+# Ackley function: complex, non-convex objective function
+def objective_function(x, y):
+    term1 = -20 * np.exp(-0.2 * np.sqrt(0.5 * (x**2 + y**2)))
+    term2 = -np.exp(0.5 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y)))
+    return term1 + term2 + 20 + np.e
+
+# Gradient of the objective function
+def gradient(x, y):
+    dx_term1 = 2 * x
+    dx_term2 = 3 * np.sin(1.5 * x) * np.cos(1.5 * x)
+    dx = dx_term1 + dx_term2
+
+    dy_term1 = 2 * y
+    dy_term2 = 3 * np.sin(1.5 * y) * np.cos(1.5 * y)
+    dy = dy_term1 + dy_term2
+
+    return np.array([dx, dy])
+
+# Clip points to stay within bounds
+def clip_point(point, bounds=(-3, 3)):
+    return np.clip(point, bounds[0], bounds[1])
+
+# Compute average step length
+def average_step_length(path):
+    if len(path) < 2:
+        return 0.0
+    steps = np.sqrt(np.sum(np.diff(path, axis=0)**2, axis=1))
+    return np.mean(steps) if steps.size > 0 else 0.0
+
+# SGD with Momentum
+def sgd_momentum(start, learning_rate, num_iterations, momentum=0.9, tolerance=0.01):
+    point = np.array(start, dtype=float)
+    velocity = np.zeros_like(point)
+    history = [point.copy()]
+    steps = 0
+    for i in range(num_iterations):
+        grad = gradient(point[0], point[1])
+        velocity = momentum * velocity - learning_rate * grad
+        point = clip_point(point + velocity)
+        history.append(point.copy())
+        steps += 1
+        if objective_function(point[0], point[1]) < tolerance:
+            break
+    return np.array(history), steps
+
+# AdaGrad
+def adagrad(start, learning_rate, num_iterations, epsilon=1e-8, tolerance=0.01):
+    point = np.array(start, dtype=float)
+    history = [point.copy()]
+    squared_grad_sum = np.zeros_like(point)
+    steps = 0
+    for i in range(num_iterations):
+        grad = gradient(point[0], point[1])
+        squared_grad_sum += grad**2
+        adjusted_lr = learning_rate / (np.sqrt(squared_grad_sum) + epsilon)
+        point = clip_point(point - adjusted_lr * grad)
+        history.append(point.copy())
+        steps += 1
+        if objective_function(point[0], point[1]) < tolerance:
+            break
+    return np.array(history), steps
+
+# RMSProp
+def rmsprop(start, learning_rate, num_iterations, decay_rate=0.9, epsilon=1e-8, tolerance=0.01):
+    point = np.array(start, dtype=float)
+    history = [point.copy()]
+    squared_grad_avg = np.zeros_like(point)
+    steps = 0
+    for i in range(num_iterations):
+        grad = gradient(point[0], point[1])
+        squared_grad_avg = decay_rate * squared_grad_avg + (1 - decay_rate) * grad**2
+        point = clip_point(point - (learning_rate / (np.sqrt(squared_grad_avg) + epsilon)) * grad)
+        history.append(point.copy())
+        steps += 1
+        if objective_function(point[0], point[1]) < tolerance:
+            break
+    return np.array(history), steps
+
+# Adam
+def adam(start, learning_rate, num_iterations, beta1=0.9, beta2=0.999, epsilon=1e-8, tolerance=0.01):
+    point = np.array(start, dtype=float)
+    history = [point.copy()]
+    m = np.zeros_like(point)
+    v = np.zeros_like(point)
+    t = 0
+    steps = 0
+    for i in range(num_iterations):
+        t += 1
+        grad = gradient(point[0], point[1])
+        m = beta1 * m + (1 - beta1) * grad
+        v = beta2 * v + (1 - beta2) * grad**2
+        m_hat = m / (1 - beta1**t)
+        v_hat = v / (1 - beta2**t)
+        point = clip_point(point - learning_rate * m_hat / (np.sqrt(v_hat) + epsilon))
+        history.append(point.copy())
+        steps += 1
+        if objective_function(point[0], point[1]) < tolerance:
+            break
+    return np.array(history), steps
+
+# Create Plotly figure
+def create_plotly_figure(sgd_path, adagrad_path, rmsprop_path, adam_path):
+    x = np.linspace(-3, 3, 100)
+    y = np.linspace(-3, 3, 100)
+    X, Y = np.meshgrid(x, y)
+    Z = objective_function(X, Y)
+
+    sgd_z = np.array([objective_function(x, y) for x, y in sgd_path])
+    adagrad_z = np.array([objective_function(x, y) for x, y in adagrad_path])
+    rmsprop_z = np.array([objective_function(x, y) for x, y in rmsprop_path])
+    adam_z = np.array([objective_function(x, y) for x, y in adam_path])
+
+    surface = go.Surface(
+        x=X, y=Y, z=Z,
+        colorscale='Viridis',
+        opacity=0.6,
+        colorbar=dict(
+            title='Function Value',
+            x=1.05,  # Position colorbar to the right
+            xanchor='left',
+            len=0.6
+        )
+    )
+
+    sgd_trace = go.Scatter3d(
+        x=sgd_path[:, 0], y=sgd_path[:, 1], z=sgd_z,
+        mode='lines+markers',
+        name='SGD (Momentum)',
+        line=dict(color='red', width=4),
+        marker=dict(size=3)
+    )
+    adagrad_trace = go.Scatter3d(
+        x=adagrad_path[:, 0], y=adagrad_path[:, 1], z=adagrad_z,
+        mode='lines+markers',
+        name='AdaGrad',
+        line=dict(color='blue', width=4),
+        marker=dict(size=3)
+    )
+    rmsprop_trace = go.Scatter3d(
+        x=rmsprop_path[:, 0], y=rmsprop_path[:, 1], z=rmsprop_z,
+        mode='lines+markers',
+        name='RMSProp',
+        line=dict(color='green', width=4),
+        marker=dict(size=3)
+    )
+    adam_trace = go.Scatter3d(
+        x=adam_path[:, 0], y=adam_path[:, 1], z=adam_z,
+        mode='lines+markers',
+        name='Adam',
+        line=dict(color='yellow', width=4),
+        marker=dict(size=3)
+    )
+
+    start_point = go.Scatter3d(
+        x=[sgd_path[0, 0]], y=[sgd_path[0, 1]], z=[sgd_z[0]],
+        mode='markers',
+        name='Start',
+        marker=dict(size=10, color='black', symbol='circle')
+    )
+    global_minimum = go.Scatter3d(
+        x=[0], y=[0], z=[0],
+        mode='markers',
+        name='Global Minimum',
+        marker=dict(size=10, color='red', symbol='x')
+    )
+
+    updatemenus = [
+        dict(
+            buttons=[
+                dict(args=[{'visible': [True, True, True, True, True, True, True]}], label='All', method='update'),
+                dict(args=[{'visible': [True, True, False, False, False, True, True]}], label='SGD (Momentum)', method='update'),
+                dict(args=[{'visible': [True, False, True, False, False, True, True]}], label='AdaGrad', method='update'),
+                dict(args=[{'visible': [True, False, False, True, False, True, True]}], label='RMSProp', method='update'),
+                dict(args=[{'visible': [True, False, False, False, True, True, True]}], label='Adam', method='update'),
+            ],
+            direction='down',
+            showactive=True,
+            x=0.1,
+            xanchor='left',
+            y=1.2,
+            yanchor='top'
+        )
+    ]
+
+    layout = go.Layout(
+        title='',
+        scene=dict(
+            xaxis_title='x',
+            yaxis_title='y',
+            zaxis_title='f(x, y)',
+            aspectmode='manual',
+            aspectratio=dict(x=1, y=1, z=0.5)
+        ),
+        showlegend=True,
+        legend=dict(
+            x=0.8,  # Move legend to avoid colorbar
+            y=0.9,
+            xanchor='left',
+            yanchor='top'
+        ),
+        updatemenus=updatemenus,
+        margin=dict(r=150)  # Add right margin to accommodate colorbar
+    )
+
+    fig = go.Figure(data=[surface, sgd_trace, adagrad_trace, rmsprop_trace, adam_trace, start_point, global_minimum], layout=layout)
+    return fig
+
+# Initialize Dash app
+app = Dash(__name__)
+
+# Layout of the Dash app
+app.layout = html.Div([
+    html.H1("Gradient Descent Optimization on Ackley Function"),
+    html.Div([
+        html.Label("Learning Rate:"),
+        dcc.Input(id='learning-rate', type='number', value=0.05, min=0.001, max=0.1, step=0.001),
+    ]),
+    html.Div([
+        html.Label("Number of Iterations:"),
+        dcc.Input(id='num-iterations', type='number', value=1000, min=10, max=5000, step=10),
+    ]),
+    html.Div([
+        html.Label("Momentum (SGD):"),
+        dcc.Input(id='momentum', type='number', value=0.9, min=0.0, max=1.0, step=0.01),
+    ]),
+    html.Div([
+        html.Label("Decay Rate (RMSProp):"),
+        dcc.Input(id='decay-rate', type='number', value=0.9, min=0.0, max=1.0, step=0.01),
+    ]),
+    html.Button('Run Optimization', id='run-button', n_clicks=0),
+    dcc.Graph(id='optimization-plot'),
+    html.Div(id='steps-output')
+])
+
+# Callback to update plot and steps
+@app.callback(
+    [Output('optimization-plot', 'figure'),
+     Output('steps-output', 'children')],
+    [Input('run-button', 'n_clicks')],
+    [Input('learning-rate', 'value'),
+     Input('num-iterations', 'value'),
+     Input('momentum', 'value'),
+     Input('decay-rate', 'value')]
+)
+def update_plot(n_clicks, learning_rate, num_iterations, momentum, decay_rate):
+    start_point = [2.0, 2.0]
+    tolerance = 0.01
+
+    if learning_rate is None or num_iterations is None or momentum is None or decay_rate is None:
+        sgd_path = np.array([start_point])
+        adagrad_path = np.array([start_point])
+        rmsprop_path = np.array([start_point])
+        adam_path = np.array([start_point])
+        steps_text = "Please provide valid inputs."
+    else:
+        sgd_path, sgd_steps = sgd_momentum(start_point, learning_rate, int(num_iterations), momentum, tolerance)
+        adagrad_path, adagrad_steps = adagrad(start_point, learning_rate, int(num_iterations), tolerance=tolerance)
+        rmsprop_path, rmsprop_steps = rmsprop(start_point, learning_rate, int(num_iterations), decay_rate, tolerance=tolerance)
+        adam_path, adam_steps = adam(start_point, learning_rate, int(num_iterations), tolerance=tolerance)
+
+        # Compute final function values and average step lengths
+        sgd_final = objective_function(sgd_path[-1, 0], sgd_path[-1, 1])
+        adagrad_final = objective_function(adagrad_path[-1, 0], adagrad_path[-1, 1])
+        rmsprop_final = objective_function(rmsprop_path[-1, 0], rmsprop_path[-1, 1])
+        adam_final = objective_function(adam_path[-1, 0], adam_path[-1, 1])
+
+        sgd_step_length = average_step_length(sgd_path)
+        adagrad_step_length = average_step_length(adagrad_path)
+        rmsprop_step_length = average_step_length(rmsprop_path)
+        adam_step_length = average_step_length(adam_path)
+
+        steps_text = [
+            html.P(f"SGD with Momentum: {sgd_steps} steps, Final f(x, y) = {sgd_final:.4f}, Avg Step Length = {sgd_step_length:.4f}"),
+            html.P(f"AdaGrad: {adagrad_steps} steps, Final f(x, y) = {adagrad_final:.4f}, Avg Step Length = {adagrad_step_length:.4f}"),
+            html.P(f"RMSProp: {rmsprop_steps} steps, Final f(x, y) = {rmsprop_final:.4f}, Avg Step Length = {rmsprop_step_length:.4f}"),
+            html.P(f"Adam: {adam_steps} steps, Final f(x, y) = {adam_final:.4f}, Avg Step Length = {adam_step_length:.4f}")
+        ]
+
+    fig = create_plotly_figure(sgd_path, adagrad_path, rmsprop_path, adam_path)
+    return fig, steps_text
+
+# Run the app
+if __name__ == '__main__':
+    app.run(debug=True)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[17], line 2[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
+[0;32m----> 2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mplotly[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgraph_objects[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mgo[39;00m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mdash[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Dash, dcc, html, Input, Output
+[1;32m      5[0m [38;5;66;03m# Ackley function: complex, non-convex objective function[39;00m
+
+[0;31mModuleNotFoundError[0m: No module named 'plotly'
+
