@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Dimensionality Reduction: PCA &#8212; My sample book</title>
+    <title>Dimensionality Reduction: PCA &#8212; Machine Learning for Business</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -155,8 +155,8 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Machine Learning for Business - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Machine Learning for Business - Home"/>`);</script>
   
   
 </a></div>
@@ -182,9 +182,6 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
 <li class="toctree-l1"><a class="reference internal" href="symbols.html">Common Math Symbols and Notations in Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1_Linear_regression.html">Linear Regression</a></li>
 
@@ -325,6 +322,37 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/chandraveshchaudhari/BusinessML_web/blob/master/docs/5_Dimensionality_Reduction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -333,7 +361,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/chandraveshchaudhari/BusinessML_web" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -350,7 +378,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F5_Dimensionality_Reduction.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/chandraveshchaudhari/BusinessML_web/issues/new?title=Issue%20on%20page%20%2F5_Dimensionality_Reduction.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -801,9 +829,6 @@ A = \begin{bmatrix} 2 &amp; 1 \ 1 &amp; 2 \end{bmatrix}
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/589af07d2b65c9de37db4d23daef0879de6d0d677f57d6d6fa0dada4af6c3dfd.png" src="_images/589af07d2b65c9de37db4d23daef0879de6d0d677f57d6d6fa0dada4af6c3dfd.png" />
-</div>
 </div>
 <p>Here’s your content converted to Jupyter Notebook Markdown with properly formatted LaTeX equations using $ signs for rendering:</p>
 <p>⸻</p>
@@ -941,12 +966,6 @@ $<span class="math notranslate nohighlight">\(
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dot product (should be 0): 0
-</pre></div>
-</div>
-<img alt="_images/a55d5c82ab80ea6f11bb4b246ba4bde4a40fe418da2e63e798137a4da96bd61c.png" src="_images/a55d5c82ab80ea6f11bb4b246ba4bde4a40fe418da2e63e798137a4da96bd61c.png" />
-</div>
 </div>
 <p>⸻</p>
 <p>What is PCA?</p>
@@ -1016,9 +1035,6 @@ Reduce dimensions by projecting onto these top directions.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/cc228da5e2d81728dad6f72a72180059f70256ef3b727cf8bb7aa5998304b26c.png" src="_images/cc228da5e2d81728dad6f72a72180059f70256ef3b727cf8bb7aa5998304b26c.png" />
 </div>
 </div>
 <p>Explanation of the Plot
@@ -1212,43 +1228,6 @@ Z = X_{\text{centered}} \cdot W_k, \quad \text{where} \quad Z \in \mathbb{R}^{n 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Original Matrix ===
-[[4 2]
- [1 3]]
-
-=== Calculating Determinant ===
-det(A) = 4*3 - 2*1 = 10
-=== Step 1: Find Eigenvalues ===
-Solving det(A - λI) = 0
-
-Characteristic equation: λ² - 7λ + 10 = 0
-
-Eigenvalues found: [np.float64(5.0), np.float64(2.0)]
-
-=== Step 2: Find Eigenvectors ===
-
-For eigenvalue λ1 = 5.0:
-A - λ1I:
-[[-1.  2.]
- [ 1. -2.]]
-Eigenvector v1: [0.89442719 0.4472136 ]
-
-For eigenvalue λ2 = 2.0:
-A - λ2I:
-[[2. 2.]
- [1. 1.]]
-Eigenvector v2: [ 0.70710678 -0.70710678]
-
-=== Verification ===
-A @ v1: [4.47213595 2.23606798]
-λ1 * v1: [4.47213595 2.23606798]
-
-A @ v2: [ 1.41421356 -1.41421356]
-λ2 * v2: [ 1.41421356 -1.41421356]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1298,54 +1277,6 @@ A @ v2: [ 1.41421356 -1.41421356]
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
 <span class="n">reconstruct_from_eigen</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Original Matrix ===
-A:
- [[4 2]
- [1 3]]
-
-=== Step 1: Eigen Decomposition ===
-Eigenvalues (λ): [5. 2.]
-Eigenvectors (columns):
- [[ 0.89442719 -0.70710678]
- [ 0.4472136   0.70710678]]
-
-=== Step 2: Verify Eigenproperties ===
-A @ v5.0: [4.47213595 2.23606798]
-λ * v5.0: [4.47213595 2.23606798]
-
-A @ v2.0: [-1.41421356  1.41421356]
-λ * v2.0: [-1.41421356  1.41421356]
-
-
-=== Step 3: Matrix Reconstruction ===
-Using A = V Λ V⁻¹
-Diagonal matrix Λ:
- [[5. 0.]
- [0. 2.]]
-Eigenvector matrix V:
- [[ 0.89442719 -0.70710678]
- [ 0.4472136   0.70710678]]
-Inverse of V:
- [[ 0.74535599  0.74535599]
- [-0.47140452  0.94280904]]
-
-Reconstructed A:
- [[4. 2.]
- [1. 3.]]
-
-=== Verification ===
-Original A:
- [[4 2]
- [1 3]]
-Reconstructed A:
- [[4. 2.]
- [1. 3.]]
-
-Reconstruction successful? True
 </pre></div>
 </div>
 </div>
@@ -1455,93 +1386,6 @@ Reconstruction successful? True
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== SVD CALCULATION DEMONSTRATION ====
-
-=== Our Implementation ===
-=== Original Matrix ===
-X:
- [[1. 2.]
- [3. 4.]
- [5. 6.]]
-Shape: (3, 2)
-
-=== Step 1: Compute X^T X ===
-X^T X:
- [[35. 44.]
- [44. 56.]]
-Shape: (2, 2)
-
-=== Step 2: Eigen Decomposition of X^T X ===
-Eigenvalues (s^2):
- [90.73549491  0.26450509]
-Eigenvectors (columns of V):
- [[-0.61962948 -0.78489445]
- [-0.78489445  0.61962948]]
-
-
-=== Step 3: Compute Singular Values and Vt ===
-Singular values (s):
- [9.52551809 0.51430058]
-Vt (transpose of V):
- [[-0.61962948 -0.78489445]
- [-0.78489445  0.61962948]]
-
-
-=== Step 4: Compute U ===
-U (before orthogonalization):
- [[-0.2298477   0.88346102]
- [-0.52474482  0.24078249]
- [-0.81964194 -0.40189603]]
-
-
-=== Step 5: Orthogonalize U ===
-U (after QR orthogonalization):
- [[-0.2298477   0.88346102]
- [-0.52474482  0.24078249]
- [-0.81964194 -0.40189603]]
-
-
-=== Final SVD Components ===
-U:
- [[-0.2298477   0.88346102]
- [-0.52474482  0.24078249]
- [-0.81964194 -0.40189603]]
-s:
- [9.52551809 0.51430058]
-Vt:
- [[-0.61962948 -0.78489445]
- [-0.78489445  0.61962948]]
-
-
-
-=== Scipy&#39;s Implementation ===
-U:
- [[-0.2298477   0.88346102]
- [-0.52474482  0.24078249]
- [-0.81964194 -0.40189603]]
-s:
- [9.52551809 0.51430058]
-Vt:
- [[-0.61962948 -0.78489445]
- [-0.78489445  0.61962948]]
-
-=== Verification ===
-Reconstructed matrix (our):
- [[1. 2.]
- [3. 4.]
- [5. 6.]]
-Reconstructed matrix (scipy):
- [[1. 2.]
- [3. 4.]
- [5. 6.]]
-Original matrix:
- [[1. 2.]
- [3. 4.]
- [5. 6.]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1617,53 +1461,6 @@ Original matrix:
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Verification ===&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Our SVD θ:&quot;</span><span class="p">,</span> <span class="n">theta</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Numpy lstsq θ:&quot;</span><span class="p">,</span> <span class="n">lstq_solution</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== DEMONSTRATION: SVD FOR LINEAR REGRESSION ====
-
-Original data:
-X: [[1 2]
- [3 4]
- [5 6]
- [7 8]]
-y: [[ 3.24835708]
- [ 6.93086785]
- [11.32384427]
- [15.76151493]] 
-
-=== Step 1: Design Matrix (with bias column) ===
-X shape: (4, 3)
-[[1. 1. 2.]
- [1. 3. 4.]
- [1. 5. 6.]] ...
-
-=== Step 2: Singular Value Decomposition ===
-U shape: (4, 3)
-Singular values (s): [1.43819220e+01 1.07718102e+00 5.40173491e-18]
-Vt shape: (3, 3) 
-
-=== Step 3: Determine Numerical Rank ===
-Tolerance: 1.2773712774076803e-14
-Effective rank: 2 
-
-=== Step 4: Compute Pseudoinverse ===
-Reciprocal of non-zero singular values:
-[0.06953174 0.92834907 0.        ]
-Σ⁺ (pseudoinverse of diagonal matrix):
-[[0.06953174 0.         0.        ]
- [0.         0.92834907 0.        ]
- [0.         0.         0.        ]] 
-
-=== Step 5: Calculate Coefficients θ ===
-θ = VΣ⁺Uᵀy
-Final coefficients:
-[-0.07910348  1.08786299  1.00875951]
-
-=== Verification ===
-Our SVD θ: [-0.07910348  1.08786299  1.00875951]
-Numpy lstsq θ: [-0.07910348  1.08786299  1.00875951]
 </pre></div>
 </div>
 </div>
@@ -1886,47 +1683,6 @@ Result	Eigenvector equation: Σw = λw	Find principal directions (PCA axes)</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;Pca 1 Small.png&#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># https://youtu.be/fkf4IBRSeEc?si=rkWEW-W7eZjTxqb0</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;Pca 1 Small.png&#39;</span><span class="p">))</span>
-
-<span class="nn">File /Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/IPython/core/display.py:1053,</span> in <span class="ni">Image.__init__</span><span class="nt">(self, data, url, filename, format, embed, width, height, retina, unconfined, metadata, alt)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1051</span> <span class="bp">self</span><span class="o">.</span><span class="n">unconfined</span> <span class="o">=</span> <span class="n">unconfined</span>
-<span class="g g-Whitespace">   </span><span class="mi">1052</span> <span class="bp">self</span><span class="o">.</span><span class="n">alt</span> <span class="o">=</span> <span class="n">alt</span>
-<span class="ne">-&gt; </span><span class="mi">1053</span> <span class="nb">super</span><span class="p">(</span><span class="n">Image</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1054</span>         <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1056</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="p">{}):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1057</span>     <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span>
-
-<span class="nn">File /Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/IPython/core/display.py:371,</span> in <span class="ni">DisplayObject.__init__</span><span class="nt">(self, data, url, filename, metadata)</span>
-<span class="g g-Whitespace">    </span><span class="mi">368</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">369</span>     <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="ne">--&gt; </span><span class="mi">371</span> <span class="bp">self</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">372</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_data</span><span class="p">()</span>
-
-<span class="nn">File /Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/IPython/core/display.py:1088,</span> in <span class="ni">Image.reload</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1086</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Reload the raw data from file or URL.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1087</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1088</span>     <span class="nb">super</span><span class="p">(</span><span class="n">Image</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1089</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">retina</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1090</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_retina_shape</span><span class="p">()</span>
-
-<span class="nn">File /Volumes/MacSSD/Machine Learning for Business/.venv/lib/python3.10/site-packages/IPython/core/display.py:397,</span> in <span class="ni">DisplayObject.reload</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">395</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">396</span>     <span class="n">encoding</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_flags</span> <span class="k">else</span> <span class="s2">&quot;utf-8&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">397</span>     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_flags</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">398</span>         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">399</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">400</span>     <span class="c1"># Deferred import</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;Pca 1 Small.png&#39;
 </pre></div>
 </div>
 </div>
@@ -2377,7 +2133,7 @@ Result	Eigenvector equation: Σw = λw	Find principal directions (PCA axes)</p>
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Chandravesh Chaudhari
 </p>
 
   </div>

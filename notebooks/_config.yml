@@ -8,7 +8,7 @@ logo: logo.png
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
+  execute_notebooks: off
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -30,3 +30,16 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  extra_css:
+    - https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css
+  extra_js:
+    - https://code.jquery.com/jquery-3.5.1.slim.min.js
+    - https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js
+    - https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js
+  theme: _templates  # Custom theme for "Run" dropdown
+
+  # Launch buttons for interactive environments
+launch_buttons:
+  notebook_interface: "jupyterlab"  # Use JupyterLab interface for JupyterLite
+  colab_url: "https://colab.research.google.com"
+  jupyterlite_url: "https://chandraveshchaudhari.github.io/BusinessML_web/jupyterlite"

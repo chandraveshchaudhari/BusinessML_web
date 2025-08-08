@@ -1,0 +1,15 @@
+{% extends "default/page.html" %}
+{% block content %}
+{{ super() }}
+{% if page.is_notebook %}
+<div class="dropdown" style="margin-top: 10px;">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+    Run
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="{{ jupyterlite_url }}/lab/index.html?path={{ page.notebook_path | basename }}">JupyterLite</a></li>
+    <li><a href="{{ colab_url }}/github/{{ repository.url }}/blob/{{ repository.branch }}/notebooks/{{ page.notebook_path | basename }}">Google Colab</a></li>
+  </ul>
+</div>
+{% endif %}
+{% endblock %}
