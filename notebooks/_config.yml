@@ -1,30 +1,23 @@
-# Book settings
-# Learn more at https://jupyterbook.org/customize/config.html
-
+# notebooks/_config.yml
 title: Machine Learning for Business
 author: Chandravesh Chaudhari
 logo: logo.png
 
-# Execution settings
 execute:
-  execute_notebooks: off  # Disable execution; JupyterLite/Colab handle runtime
+  execute_notebooks: off
 
-# Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
     targetname: book.tex
 
-# Add a bibtex file so that we can create citations
 bibtex_bibfiles:
   - references.bib
 
-# Information about where the book exists on the web
 repository:
   url: https://github.com/chandraveshchaudhari/BusinessML_web
-  path_to_book: .  # Source files are in the repository root
-  branch: master
+  path_to_book: .   # because this _config.yml is inside notebooks/ (use '.' here)
+  branch: main/notebooks/
 
-# Add GitHub buttons to your book
 html:
   use_issues_button: true
   use_repository_button: true
@@ -34,10 +27,9 @@ html:
     - https://code.jquery.com/jquery-3.5.1.slim.min.js
     - https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js
     - https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js
-  theme: _templates  # Custom theme for "Run" dropdown
+  # Do NOT set theme: _templates. Use a real theme name (sphinx-book-theme is default for jupyter-book)
+  theme: sphinx_book_theme
 
-# Launch buttons for interactive environments
 launch_buttons:
   notebook_interface: "jupyterlab"
   colab_url: "https://colab.research.google.com"
-  jupyterlite_url: "https://chandraveshchaudhari.github.io/BusinessML_web/jupyterlite"
