@@ -27,3 +27,12 @@ chapters:
 - file: Generative_Models
 - file: Performance_Metrics
 - file: Visualization
+- file: clustering
+- file: descriptive_analytics
+- file: Diff_and_integration
+- file: financial_forecasting
+- file: level_data_time_series
+- file: Llm_and_transformers
+- file: Python_crash_course
+- file: seasonal_data
+- file: time_series_models
