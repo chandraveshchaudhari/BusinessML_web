@@ -31,8 +31,8 @@
   "scripts": {
     "build": "jlpm build:css && jlpm build:lib && jlpm build:labextension:dev",
     "build:css": "python generate_css.py",
-    "build:labextension": "jupyter labextension build ",
-    "build:labextension:dev": "jupyter labextension build --development True ",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
     "build:lib": "tsc",
     "build:prod": "jlpm clean && jlpm build:css && jlpm build:lib && jlpm build:labextension",
     "clean": "jlpm clean:lib",
@@ -41,7 +41,7 @@
     "clean:lib": "rimraf lib tsconfig.tsbuildinfo style/base.css",
     "clean:lintcache": "rimraf .eslintcache .stylelintcache",
     "eslint": "jlpm eslint:check --fix",
-    "eslint:check": "eslint  --cache --ext .ts,.tsx",
+    "eslint:check": "eslint . --cache --ext .ts,.tsx",
     "install:extension": "jlpm build",
     "lint": "jlpm stylelint && jlpm prettier && jlpm eslint",
     "lint:check": "jlpm stylelint:check && jlpm prettier:check && jlpm eslint:check",
@@ -51,7 +51,7 @@
     "stylelint": "jlpm stylelint:check --fix",
     "stylelint:check": "stylelint --cache \"style/**/*.css\"",
     "watch": "run-p watch:src watch:labextension",
-    "watch:labextension": "jupyter labextension watch ",
+    "watch:labextension": "jupyter labextension watch .",
     "watch:src": "tsc -w"
   },
   "dependencies": {

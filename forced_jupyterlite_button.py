@@ -1,43 +1,53 @@
 import os
 import re
+import yaml
 
-# List of allowed notebook files from your TOC (without extension)
-toc_files = [
-    "symbols",
-    "1_Linear_regression",
-    "2_Regularization",
-    "3_Naive_Bayes",
-    "4_Logistic_Regression",
-    "5_Dimensionality_Reduction",
-    "6_Clustering",
-    "7_Gaussian_Mixture_Models",
-    "8_Nearest_Neighbour_Algorithm",
-    "10_Support_Vector_Machines",
-    "11_Decision_Trees",
-    "12_Ensemble_Methods",
-    "13_Neural_Networks",
-    "14_Arima",
-    "15_LSTM",
-    "16_CNN",
-    "17_Resnet",
-    "18_LLM",
-    "19_Reinforcement_Learning",
-    "20_Multimodal_Learning",
-    "Generative_Models",
-    "Performance_Metrics",
-    "Visualization"
-]
-
-# Directory containing your built HTML files
+# Paths
+toc_path = "notebooks/_toc.yml"
+notebooks_dir = "notebooks"
 html_dir = "docs"
 
-# Regex to find Colab button and extract filename
+# Step 1: Read TOC file
+with open(toc_path, "r", encoding="utf-8") as f:
+    toc_data = yaml.safe_load(f)
+
+toc_files = []
+
+def extract_files(entries):
+    """Extract all 'file' entries from TOC, ignoring extension for now."""
+    for item in entries:
+        if isinstance(item, dict):
+            if "file" in item:
+                toc_files.append(os.path.basename(item["file"]))
+            if "sections" in item:
+                extract_files(item["sections"])
+        elif isinstance(item, list):
+            extract_files(item)
+
+if "chapters" in toc_data:
+    extract_files(toc_data["chapters"])
+elif "parts" in toc_data:
+    for part in toc_data["parts"]:
+        if "chapters" in part:
+            extract_files(part["chapters"])
+
+# Step 2: Match only actual notebook files from directory
+valid_notebooks = []
+for name in toc_files:
+    no_ext, _ = os.path.splitext(name)
+    ipynb_path = os.path.join(notebooks_dir, no_ext + ".ipynb")
+    if os.path.exists(ipynb_path):
+        valid_notebooks.append(no_ext)
+
+print(f"📚 Valid notebooks from TOC: {valid_notebooks}")
+
+# Step 3: Regex to find Colab button
 colab_regex = re.compile(
     r'(<a[^>]+href="https://colab\.research\.google\.com/[^"]+/(?P<filename>[^/"]+\.ipynb)"[^>]*>.*?</a>)',
     re.DOTALL
 )
 
-# JupyterLite button template with inline SVG
+# Step 4: JupyterLite button template
 jupyterlite_template = """
 <li>
   <a href="https://chandraveshchaudhari.github.io/BusinessML_web/jupyterlite/lab/index.html?path={filename}" target="_blank"
@@ -58,7 +68,7 @@ jupyterlite_template = """
 </li>
 """
 
-# Loop through HTML files
+# Step 5: Loop through HTML files and inject buttons
 for root, _, files in os.walk(html_dir):
     for file in files:
         if file.endswith(".html"):
@@ -66,22 +76,17 @@ for root, _, files in os.walk(html_dir):
             with open(path, "r", encoding="utf-8") as f:
                 html = f.read()
 
-            # Search for Colab button
             match = colab_regex.search(html)
             if match:
                 filename = match.group("filename")
                 notebook_name = filename.replace(".ipynb", "")
 
-                if notebook_name in toc_files:
-                    # Build JupyterLite button for this file
+                if notebook_name in valid_notebooks:
                     jl_button = jupyterlite_template.format(filename=filename)
-
-                    # Insert JupyterLite button right after Colab button
                     new_html = html.replace(match.group(1), match.group(1) + "\n" + jl_button)
 
-                    # Save updated HTML
                     with open(path, "w", encoding="utf-8") as f:
                         f.write(new_html)
                     print(f"✅ Added JupyterLite button to {file}")
                 else:
-                    print(f"⏭ Skipped {file} (not in TOC)")
+                    print(f"⏭ Skipped {file} (not in TOC notebooks)")

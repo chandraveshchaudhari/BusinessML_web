@@ -4,15 +4,16 @@ import subprocess
 from pathlib import Path
 
 # --- CONFIG ---
-NOTEBOOKS_DIR = Path("notebooks")
-DOCS_DIR = Path("docs")
-TEMP_NOTEBOOKS_DIR = Path("temp_notebooks")
-JUPYTERLITE_BUILD_DIR = Path("jupyterlite_build")
-JUPYTERLITE_OUTPUT_DIR = DOCS_DIR / "jupyterlite"
-FORCE_BUTTON_SCRIPT = Path("forced_jupyterlite_button.py")
+NOTEBOOKS_DIR = Path("notebooks")  # Path to your JupyterBook notebooks
+DOCS_DIR = Path("docs")            # Path to your GitHub Pages docs folder
+TEMP_NOTEBOOKS_DIR = Path("temp_notebooks")  # Temp folder for JupyterLite build
+JUPYTERLITE_BUILD_DIR = Path("jupyterlite_build")  # Temp output from JupyterLite
+JUPYTERLITE_OUTPUT_DIR = DOCS_DIR / "jupyterlite"  # Final location for JupyterLite
+FORCE_BUTTON_SCRIPT = Path("forced_jupyterlite_button.py")  # Custom patch script
 
 def run_cmd(cmd, cwd=None):
     """Run a shell command with live output."""
+    cmd = [str(c) for c in cmd]  # Ensure all args are strings
     print(f"\n[RUNNING] {' '.join(cmd)}")
     result = subprocess.run(cmd, cwd=cwd)
     if result.returncode != 0:
@@ -27,7 +28,7 @@ def clean_dir(path):
 def build_jupyterbook():
     """Step 1: Build JupyterBook from notebooks and move HTML to docs/."""
     print("\n=== Building JupyterBook ===")
-    run_cmd(["jupyter-book", "build", NOTEBOOKS_DIR])
+    run_cmd(["jupyter-book", "build", str(NOTEBOOKS_DIR)])
 
     html_build_path = NOTEBOOKS_DIR / "_build" / "html"
 
@@ -39,8 +40,10 @@ def build_jupyterbook():
         for item in DOCS_DIR.iterdir():
             if item.is_dir() and item.name == "jupyterlite":
                 continue
-            if item.is_file() or item.is_dir():
-                shutil.rmtree(item) if item.is_dir() else item.unlink()
+            if item.is_dir():
+                shutil.rmtree(item)
+            else:
+                item.unlink()
 
     # Move new HTML files into docs/
     for item in html_build_path.iterdir():
@@ -63,7 +66,11 @@ def build_jupyterlite():
 
     # Build JupyterLite
     clean_dir(JUPYTERLITE_BUILD_DIR)
-    run_cmd(["jupyter", "lite", "build", "--contents", str(TEMP_NOTEBOOKS_DIR), "--output-dir", str(JUPYTERLITE_BUILD_DIR)])
+    run_cmd([
+        "jupyter", "lite", "build",
+        "--contents", str(TEMP_NOTEBOOKS_DIR),
+        "--output-dir", str(JUPYTERLITE_BUILD_DIR)
+    ])
 
     # Run forced_jupyterlite_button.py
     if FORCE_BUTTON_SCRIPT.exists():
