@@ -5,10 +5,9 @@ title: Machine Learning for Business
 author: Chandravesh Chaudhari
 logo: logo.png
 
-# Force re-execution of notebooks on each build.
-# See https://jupyterbook.org/content/execute.html
+# Execution settings
 execute:
-  execute_notebooks: off
+  execute_notebooks: off  # Disable execution; JupyterLite/Colab handle runtime
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -21,12 +20,11 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/chandraveshchaudhari/BusinessML_web  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
+  url: https://github.com/chandraveshchaudhari/BusinessML_web
+  path_to_book: .  # Source files are in the repository root
+  branch: master
 
 # Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_issues_button: true
   use_repository_button: true
@@ -38,8 +36,8 @@ html:
     - https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js
   theme: _templates  # Custom theme for "Run" dropdown
 
-  # Launch buttons for interactive environments
+# Launch buttons for interactive environments
 launch_buttons:
-  notebook_interface: "jupyterlab"  # Use JupyterLab interface for JupyterLite
+  notebook_interface: "jupyterlab"
   colab_url: "https://colab.research.google.com"
   jupyterlite_url: "https://chandraveshchaudhari.github.io/BusinessML_web/jupyterlite"
