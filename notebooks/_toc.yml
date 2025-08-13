@@ -51,6 +51,19 @@ chapters:
     - file: business_dashboards
       title: Business Dashboards
 
+# 18. Performance Metrics & Visualisation
+- file: metrics_visualisation
+  title: Performance Metrics & Visualisation
+  sections:
+    - file: regression_metrics
+      title: Regression Metrics
+    - file: classification_metrics_2
+      title: Classification Metrics
+    - file: business_visualisation
+      title: Business Visualisation
+    - file: metrics_lab
+      title: Notebook – Metric Dashboard
+
 # 4. Supervised Regression: Linear Models
 - file: regression_linear_models
   title: Supervised Regression- Linear Models
@@ -256,19 +269,6 @@ chapters:
       title: A/B Testing & KPI Alignment
     - file: production_case
       title: Mini Case – Dashboard Deployment
-
-# 18. Performance Metrics & Visualisation
-- file: metrics_visualisation
-  title: Performance Metrics & Visualisation
-  sections:
-    - file: regression_metrics
-      title: Regression Metrics
-    - file: classification_metrics_2
-      title: Classification Metrics
-    - file: business_visualisation
-      title: Business Visualisation
-    - file: metrics_lab
-      title: Notebook – Metric Dashboard
 
 # 19. Assessment, Labs & Capstone
 - file: assessment

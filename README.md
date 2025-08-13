@@ -55,6 +55,17 @@ rm -r jupyterlite_things/
 
 ---
 
+
+### **Performance Metrics & Visualisation**
+
+* Regression: MSE, RMSE, MAE
+* Classification: precision/recall, ROC, PR, calibration plots
+* Business visualization: lift charts, profit curves
+* **Notebook:** Metric dashboard utility functions
+
+---
+
+
 ### **Supervised Regression: Linear Models**
 
 * Model class: linear model family (notation & assumptions)
@@ -197,15 +208,6 @@ rm -r jupyterlite_things/
 * Interpretability: SHAP, partial dependence
 * A/B testing & KPI alignment
 * **Mini-case:** Model → dashboard deployment
-
----
-
-### **Performance Metrics & Visualisation**
-
-* Regression: MSE, RMSE, MAE
-* Classification: precision/recall, ROC, PR, calibration plots
-* Business visualization: lift charts, profit curves
-* **Notebook:** Metric dashboard utility functions
 
 ---
 
